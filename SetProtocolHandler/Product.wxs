@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="SetProtocolHandler" Language="1033" Version="1.0.0.0" Manufacturer="TechSmith" UpgradeCode="631248bf-aa79-427a-9cec-4f192bf681aa">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="CamtasiaUrlProtocol" Title="SetProtocolHandler" Level="1">
+      <ComponentRef Id="RegistryEntries"/>
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+      <Component Id="RegistryEntries" Guid="{6A1F8655-2420-47DE-A5C3-A2D460161086}">
+        <RegistryKey Root="HKCU"
+                     Key="Software\Classes\tsc-camtasia">
+          <RegistryValue Type="string" Name="URL Protocol" Value="URL:Camtasia Protocol"/>
+          <RegistryValue Type="string" Value=""/>
+          <RegistryKey Key="DefaultIcon">
+            <RegistryValue Type="string" Value="C:\Users\Public\Camtasia\TSCCapture.ico"/>
+          </RegistryKey>
+          <RegistryKey Key="shell">
+            <RegistryKey Key="open">
+              <RegistryKey Key="command">
+                <RegistryValue Type="string" Value='cmd /C "start https://www.techsmith.com/"'></RegistryValue>
+              </RegistryKey>
+            </RegistryKey>
+          </RegistryKey>
+        </RegistryKey>
+      </Component>
+		</Directory>
+	</Fragment>
+</Wix>
